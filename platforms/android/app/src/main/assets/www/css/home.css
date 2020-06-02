@@ -1,1 +1,28 @@
 /*This is for the Home CSS Page*/
+img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    
+}
+
+.menu {
+    overflow: hidden;
+    position: fixed;
+    background-color: #711A2D;
+    bottom: 0;
+    width: 100%;
+}
+
+.menu a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 35px;
+    font-family: 'verdana';
+    padding: 14px 16px;
+    
+}
+
+.barchart img {
+    padding: 95px 0px 0px;
+}
