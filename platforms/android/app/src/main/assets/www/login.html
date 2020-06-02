@@ -3,13 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
     <title>Login</title>
 </head>
 <body>
-    <p>Write to see if reflects in app</p>
-    <p>hello</p>
-    <a href="home.html">Tap here to go to home page</a>
 
-    <script type="text/javascript" src="cordova.js"></script> <!--Online say this line allows us to access cordova library-->
+    <div class="logo">
+        <img src="img/revamp.png" alt="re:Vamp" width="90%" height="70%">
+    </div>
+
+    <div class="loginpage">
+      <form class="form">
+        <p>Username: <input name="Username" id="name" placeholder="Enter Userame"></p>
+        <p>Password: <input name="Password" id="pass" placeholder="Enter Password"></p>
+        <button type="submit" id="login-button" onclick="myFunction()"><a href="home.html">Login</a></button>
+      </form>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script> 
+    <script type="text/javascript" src="js/login.js"></script>
 </body>
 </html>
