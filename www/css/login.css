@@ -1,1 +1,31 @@
 /*This is for the login CSS Page*/
+body{
+    background-color: #711A2D;
+}
+
+.logo{
+    padding: 150px 60px 0px;
+    margin: auto;
+}
+
+.loginpage{
+    margin: auto;
+    width: 360px;
+    padding: 30px 60px 40px;
+}
+  
+.form{
+    font-family: verdana;
+    font-size: 12px;
+}
+  
+.form button{
+    font-family: verdana;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+.form button a{
+    text-decoration: none;
+    color: #000000;
+}
