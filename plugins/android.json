@@ -19,7 +19,18 @@
     },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.winnus.revamp"
+    },
+    "cordova-plugin-camera": {
+      "ANDROID_SUPPORT_V4_VERSION": "27.+",
+      "PACKAGE_NAME": "com.winnus.revamp"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "com.winnus.revamp"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.winnus.revamp"
+    }
+  }
 }

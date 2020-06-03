@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/inflow.css">
-    <title>Inflow</title>
+    <title>InflowP</title>
 </head>
 <body>
-
-    <p>Inflow Page</p>
-
     <nav class='menu'>
         <a href="inflow.html">+</a> &nbsp;
         <a href="outflow.html">-</a> &nbsp;
@@ -21,55 +18,99 @@
         <div data-role="header">
             <h1>Home</h1>
         </div>
-    
+
         <div data-role="main" class="ui-content">
             <p>
-                <a target="_blank" href="javascript:scan();" style="text-decoration: none" onclick="scan()"><button>Scan</button></a>
+                <a target="_blank" href="javascript:scan();" style="text-decoration: none"><button>Scan</button></a>
                 <a target="_blank" href="#display" style="text-decoration: none"><button>Display Scanned Data</button></a>
             </p>
         </div>
     </div>
-<!--
-    <script>
-        if(localStorage.getItem("LocalData") == null) {
-            var data = [];
-            data = JSON.stringify(data);
-            localStorage.setItem("LocalData", data);
-        }
 
-        function scan()
-        {
-            cordova.plugins.barcodeScanner.scan(
-                function (result) {
-                    if(!result.cancelled) {
-                        if(result.format == "QR_CODE") {
-                            navigator.notification.prompt("Please enter name of data",  function(input){
-                                var name = input.input1;
-                                var value = result.text;
+    <div data-role="page" id="display">
+        <div data-role="header">
+            <a target="_blank" href="#home" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+            <h1>Display</h1>
+        </div>
 
-                                var data = localStorage.getItem("LocalData");
-                                console.log(data);
-                                data = JSON.parse(data);
-                                data[data.length] = [name, value];
+        <div data-role="main" class="ui-content">
+            <table data-role="table" data-mode="column" id="allTable" class="ui-responsive table-stroke">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-                                localStorage.setItem("LocalData", JSON.stringify(data));
-
-                                alert("Done");
-                            });
-                        }
-                    }
-                },
-
-                function (error) {
-                    alert("Scanning failed: " + error);
-                }
-            );
-        }
-    </script>
--->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script type="text/javascript" src="cordova.js"></script> 
-    <script type="text/javascript" src="js/inflow.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script>
+            function scan()
+            {
+                cordova.plugins.barcodeScanner.scan(
+                    function (result) {
+                        if(!result.cancelled)
+                        {
+                            if(result.format == "QR_CODE")
+                            {
+                                navigator.notification.prompt("Please enter name of data",  function(input){
+                                    var name = input.input1;
+                                    var value = result.text;
+
+                                    var data = localStorage.getItem("LocalData");
+                                    console.log(data);
+                                    data = JSON.parse(data);
+                                    data[data.length] = [name, value];
+
+                                    localStorage.setItem("LocalData", JSON.stringify(data));
+
+                                    alert("Done");
+                                });
+                            }
+                        }
+                    },
+                    function (error) {
+                        alert("Scanning failed: " + error);
+                    }
+               );
+            }
+
+            $(document).on("pagebeforeshow", "#display", function() {
+                $("table#allTable tbody").empty();
+
+                var data = localStorage.getItem("LocalData");
+                console.log(data);
+                data = JSON.parse(data);
+
+                var html = "";
+
+                for(var count = 0; count < data.length; count++)
+                {
+                    html = html + "<tr><td>" + data[count][0] + "</td><td><a href='javascript:openURL(\"" + data[count][1] + "\")'>" + data[count][1] + "</a></td></tr>";
+                }
+
+                $("table#allTable tbody").append(html).closest("table#allTable").table("refresh").trigger("create");
+
+            });
+
+            function openURL(url)
+            {
+                window.open(url, '_blank', 'location=yes');
+            }
+
+            //initialize
+            if(localStorage.getItem("LocalData") == null)
+            {
+                var data = [];
+                data = JSON.stringify(data);
+                localStorage.setItem("LocalData", data);
+            }
+        </script>
 </body>
 </html>
