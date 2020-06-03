@@ -30,5 +30,21 @@
     },
     "is_top_level": true,
     "variables": {}
+  },
+  "cordova-plugin-qr-barcode-scanner": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-qr-barcode-scanner@8.0.3"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-camera": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-camera@4.1.0"
+    },
+    "is_top_level": true,
+    "variables": {}
   }
 }

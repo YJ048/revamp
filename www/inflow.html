@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
     <link rel="stylesheet" type="text/css" href="css/inflow.css">
+    <script>  
+        function scan() {  
+            cordova.plugins.barcodeScanner.scan(  
+                function (result) {  
+                    alert("We got a barcode\n" +  
+                        "Result: " + result.text + "\n" +  
+                        "Format: " + result.format + "\n" +  
+                        "Cancelled: " + result.cancelled);  
+                },  
+                function (error) {  
+                    alert("Scanning failed: " + error);  
+                }  
+            );  
+        }  
+    </script> 
     <title>Inflow</title>
 </head>
 <body>
@@ -24,11 +39,35 @@
     
         <div data-role="main" class="ui-content">
             <p>
-                <a target="_blank" href="javascript:scan();" style="text-decoration: none" onclick="scan()"><button>Scan</button></a>
+                <a target="_blank" href="javascript:scan();" style="text-decoration: none"><button>Scan</button></a>
                 <a target="_blank" href="#display" style="text-decoration: none"><button>Display Scanned Data</button></a>
+                <button id="scan" onclick="scan()" style="width:100px; height: 30px;">Scan</button>
+                <button id="scancode">Scan2</button>
+                <!-- <button id = "cameraTakePicture">TAKE PICTURE</button> -->
             </p>
         </div>
     </div>
+
+    <!-- BarcodeReader references -->   
+
+    <!-- <script>
+        cordova.plugins.barcodeScanner.scan(
+            function (result) {
+                if(!result.cancelled)
+                {
+                alert("Barcode type is: " + result.format);
+                alert("Decoded text is: " + result.text);
+                }
+                else
+                {
+                alert("You have cancelled scan");
+                }
+            },
+            function (error) {
+                alert("Scanning failed: " + error);
+            }
+        );
+    </script> -->
 <!--
     <script>
         if(localStorage.getItem("LocalData") == null) {
@@ -69,7 +108,8 @@
 -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-    <script type="text/javascript" src="cordova.js"></script> 
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>  
     <script type="text/javascript" src="js/inflow.js"></script>
 </body>
 </html>
