@@ -8,13 +8,51 @@
 </head>
 <body>
 
-    <p>History</p>
-
     <nav class='menu'>
         <a href="inflow.html">+</a> &nbsp;
         <a href="outflow.html">-</a> &nbsp;
         <a href="history.html">History</a> &nbsp;
     </nav>
+
+    <div data-role="page" id="history">
+        <div data-role="header">
+            <h1>History</h1>
+        </div>
+    </div>
+
+    <div id="displaytable">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Batch Number</th>
+                    <th>Volume of Blood Pack</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>03/06/2020</td>
+                    <td>#I000001</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>03/06/2020</td>
+                    <td>#O000001</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>04/06/2020</td>
+                    <td>#I000002</td>
+                    <td>1000</td>
+                </tr>
+                <tr>
+                    <td>04/06/2020</td>
+                    <td>#O000002</td>
+                    <td>100</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <script type="text/javascript" src="cordova.js"></script> 
     <script type="text/javascript" src="js/history.js"></script>

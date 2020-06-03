@@ -7,6 +7,7 @@
     bottom: 0;
     width: 100%;
     text-align:center;
+    margin-left: -10px;
 }
 
 .menu a {
@@ -16,4 +17,25 @@
     font-family: 'verdana';
     padding: 30px 16px;
     
+}
+
+#history h1 {
+    font-family: 'verdana';
+    color: #711A2D;
+    text-align: center;
+}
+
+#displaytable {
+    margin: 30px auto;
+    padding: 30px 70px;
+}
+
+#displaytable table,tr,td,th {
+    border: #000000 solid 1px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+#displaytable table th td{
+    width: 100%;
 }

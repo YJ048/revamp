@@ -1,33 +1,62 @@
-var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+// This is for inflow html page
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+function scan()
+            {
+                cordova.plugins.barcodeScanner.scan(
+                    function (result) {
+                        if(!result.cancelled)
+                        {
+                            if(result.format == "QR_CODE")
+                            {
+                                navigator.notification.prompt("Please enter name of data",  function(input){
+                                    var name = input.input1;
+                                    var value = result.text;
 
-        console.log('Received Event: ' + id);
-    }
-};
+                                    var data = localStorage.getItem("LocalData");
+                                    console.log(data);
+                                    data = JSON.parse(data);
+                                    data[data.length] = [name, value];
 
-app.initialize();
+                                    localStorage.setItem("LocalData", JSON.stringify(data));
+
+                                    alert("Done");
+                                });
+                            }
+                        }
+                    },
+                    function (error) {
+                        alert("Scanning failed: " + error);
+                    }
+               );
+            }
+
+            $(document).on("pagebeforeshow", "#display", function() {
+                $("table#allTable tbody").empty();
+
+                var data = localStorage.getItem("LocalData");
+                console.log(data);
+                data = JSON.parse(data);
+
+                var html = "";
+
+                for(var count = 0; count < data.length; count++)
+                {
+                    html = html + "<tr><td>" + data[count][0] + "</td><td><a href='javascript:openURL(\"" + data[count][1] + "\")'>" + data[count][1] + "</a></td></tr>";
+                }
+
+                $("table#allTable tbody").append(html).closest("table#allTable").table("refresh").trigger("create");
+
+            });
+
+            function openURL(url)
+            {
+                window.open(url, '_blank', 'location=yes');
+            }
+
+            //initialize
+            if(localStorage.getItem("LocalData") == null)
+            {
+                var data = [];
+                data = JSON.stringify(data);
+                localStorage.setItem("LocalData", data);
+            }
