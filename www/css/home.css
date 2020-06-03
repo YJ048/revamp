@@ -12,14 +12,15 @@ img {
     background-color: #711A2D;
     bottom: 0;
     width: 100%;
+    text-align:center;
 }
 
 .menu a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 35px;
+    font-size: 25px;
     font-family: 'verdana';
-    padding: 14px 16px;
+    padding: 30px 16px;
     
 }
 
